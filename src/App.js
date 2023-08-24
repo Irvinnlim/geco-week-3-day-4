@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+class App extends Component {
+  state = {
+    people: [
+      {
+        firstName: "alina",
+        age: 20,
+        designation: "developer",
+        city: "pune",
+        id: 1,
+      },
+      {
+        firstName: "alex",
+        age: 30,
+        designation: "developer",
+        city: "pune",
+        id: 2,
+      },
+      {
+        firstName: "adam",
+        age: 30,
+        designation: "manager",
+        city: "pune",
+        id: 3,
+      },
+    ],
+  };
+
+  handleUpdate = () => {
+    const updatedPeople = [...this.state.people];
+    updatedPeople[1].designation = "senior developer";
+
+    this.setState({ people: updatedPeople });
+  };
+
+  render() {
+    return (
+      <div>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          {this.state.people.map((person) => {
+            return (
+              <p key={person.id}>
+                My name is {person.firstName}, age {person.age}, working as a{" "}
+                {person.designation} in {person.city}.
+              </p>
+            );
+          })}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <button onClick={this.handleUpdate}>Submit</button>
+      </div>
+    );
+  }
 }
 
 export default App;
